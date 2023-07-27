@@ -11,12 +11,15 @@ import {
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
-import ProductList from "./pages/productList/ProductList";
-import Product from "./pages/product/Product";
-import NewProduct from "./pages/newProduct/NewProduct";
+import MovieList from "./pages/movieList/MovieList";
+import NewMovie from "./pages/newMovie/NewMovie";
 import Login from "./pages/login/Login";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
+import { Movie } from "@mui/icons-material";
+import ListList from "./pages/listList/ListList";
+import List from "./pages/list/List";
+import NewList from "./pages/newList/NewList";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -36,9 +39,12 @@ function App() {
               <Route path="/users" element={<UserList />}></Route>
               <Route path="/user/:userId" element={<User />}></Route>
               <Route path="/newUser" element={<NewUser />}></Route>
-              <Route path="/movies" element={<ProductList />}></Route>
-              <Route path="/product/:productId" element={<Product />}></Route>
-              <Route path="/newProduct" element={<NewProduct />}></Route>
+              <Route path="/movies" element={<MovieList />}></Route>
+              <Route path="/movie/:movieId" element={<Movie />}></Route>
+              <Route path="/newMovie" element={<NewMovie />}></Route>
+              <Route path="/lists" element={<List />}></Route>
+              <Route path="/list/:listId" element={<ListList />}></Route>
+              <Route path="/newList" element={<NewList />}></Route>
             </>
           )}
         </Routes>

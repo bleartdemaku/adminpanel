@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import "./productList.css";
+import "./movieList.css";
 import { DeleteOutline } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
-import { productRows } from "../../dummyData.js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../../context/movieContext/MovieContext";
-import { getMovies } from "../../context/movieContext/apiCalls";
+import { deleteMovie, getMovies } from "../../context/movieContext/apiCalls";
 
-export default function ProductList() {
+export default function MovieList() {
   const { movies, dispatch } = useContext(MovieContext);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function ProductList() {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    // setData(data.filter((item) => item.id !== id));
+    deleteMovie(id, dispatch);
   };
 
   const columns = [
@@ -34,19 +33,10 @@ export default function ProductList() {
       },
     },
     { field: "genre", headerName: "Genre", width: 120 },
-    { field: "year", headerName: "Year", width: 120 },
-    { field: "limit", headerName: "Limit", width: 120 },
-    { field: "isSeries", headerName: "IsSeries", width: 120 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
-    },
+    { field: "year", headerName: "year", width: 120 },
+    { field: "limit", headerName: "limit", width: 120 },
+    { field: "isSeries", headerName: "isSeries", width: 120 },
+
     {
       field: "action",
       headerName: "Action",
@@ -54,12 +44,14 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link
+              to={{ pathname: "/product/" + params.row._id, movie: params.row }}
+            >
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
               className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
